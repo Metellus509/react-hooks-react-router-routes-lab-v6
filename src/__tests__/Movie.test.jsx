@@ -2,6 +2,8 @@ import "@testing-library/jest-dom";
 import { RouterProvider, createMemoryRouter} from "react-router-dom"
 import { render, screen } from "@testing-library/react";
 import routes from "../routes";
+import { moviesData } from "../pages/Movie";
+
 
 const id = 1
 const router = createMemoryRouter(routes, {
@@ -33,15 +35,23 @@ test("renders movie's time within a p tag", async () => {
   expect(p.tagName).toBe("P");
 });
 
-test("renders a span for each genre",  () => {
+test('renders genres as <span> elements', async () => {
+  const id = 1;
+  const router = createMemoryRouter(routes, {
+    initialEntries: [`/movie/${id}`],
+  });
+
   render(<RouterProvider router={router} />);
-  const genres = ["Action", "Adventure", "Fantasy"];
-  genres.forEach(async (genre) =>{
+
+  const movie = moviesData.find(m => m.id === id);
+
+  for (const genre of movie.genres) {
     const span = await screen.findByText(genre);
     expect(span).toBeInTheDocument();
     expect(span.tagName).toBe("SPAN");
-  })
+  }
 });
+
 
 test("renders the <NavBar /> component", async () => {
   const router = createMemoryRouter(routes, {

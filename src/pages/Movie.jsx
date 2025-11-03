@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 
-const moviesData = [
+export const moviesData = [
   { id: 1, title: "Doctor Strange", time: 115, genres: ["Action", "Adventure", "Fantasy"] },
   { id: 2, title: "Trolls", time: 92, genres: ["Animation", "Comedy"] },
   { id: 3, title: "Jack Reacher: Never Go Back", time: 118, genres: ["Action", "Thriller"] },
